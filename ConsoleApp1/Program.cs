@@ -14,11 +14,18 @@ namespace TictacToeConsole
             TicTacToeEngine engine = new TicTacToeEngine();
             String[] board = engine.board;
             bool active = true;
+            bool isValid = true;
+            Console.WriteLine("Type 1-9 + enter to pick a field. You can reset the game with 'reset' and you can quit the application with 'quit'");
 
             while (active)
             {
-                writeBoard(board);
-                Console.WriteLine(engine.getGameStatus());
+                if (isValid)
+                {
+                    writeBoard(board);
+                    Console.WriteLine(engine.getGameStatus());
+                }
+                isValid = true;
+                
 
                 String input = Console.ReadLine();
 
@@ -39,6 +46,11 @@ namespace TictacToeConsole
                 else if (String.Equals(input, "quit", StringComparison.OrdinalIgnoreCase))
                 {
                     active = false;
+                }
+                else
+                {
+                    Console.WriteLine("\"" +input + "\" is not a valid command. Please type a number ranging from 1 to 9, 'reset' or 'quit'");
+                    isValid = false;
                 }
 
             }
